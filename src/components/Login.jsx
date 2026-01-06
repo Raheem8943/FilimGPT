@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import Header from './Header';
 import CheckValidData from '../utils/Validation';
+
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage,setErrorMessage]=useState(null);
@@ -19,13 +21,15 @@ const Login = () => {
        
   };
 
+
+
   return (
     <div>
       <Header />
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           className="w-full h-full object-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/c5af601a-6657-4531-8f82-22e629a3795e/IN-en-20231211-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src="\src\assets\log_background.jpg"
           alt="background"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
@@ -58,6 +62,7 @@ const Login = () => {
         <button className="p-4 my-6 bg-red-700 w-full rounded-lg" onClick={handlebuttonclick}>
           {isSignInForm ? 'Sign In' : 'Sign Up'}
         </button>
+
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
           {isSignInForm
             ? 'New to FilimGPT? Sign Up Now'
