@@ -2,9 +2,9 @@ import Logo from "./Logo";
 
 const Header = () => {
   return (
-    <div className="absolute px-8 py-2 bg-linear-to-b from-black z-10 w-full">
-     {/* <img src="src/assets/FilimGPT_Logo.svg" alt="filimgpt logo" /> */}
-     <Logo/>
+    <div className="absolute top-0 left-0 px-4 py-2 w-full z-10 flex items-start justify-start">
+      {/* <img src="src/assets/FilimGPT_Logo.svg" alt="filimgpt logo" /> */}
+      <Logo />
     </div>
   );
 };

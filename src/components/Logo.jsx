@@ -5,18 +5,18 @@ const Logo = () => {
       height="80"
       viewBox="0 0 320 80"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-56"
+      className="w-56 ml-2"
     >
       <text
-        x="50%"
+        x="8"
         y="50%"
         dominantBaseline="middle"
-        textAnchor="middle"
-        fontFamily="Arial, Helvetica, sans-serif"
-        fontWeight="bold"
-        fontSize="60"
+        textAnchor="start"
+        fontFamily="Netflix Sans, Arial, Helvetica, sans-serif"
+        fontWeight="900"
+        fontSize="56"
         fill="#E50914"
-        letterSpacing="2"
+        letterSpacing="1"
       >
         FILIMGPT
       </text>
@@ -31,9 +31,7 @@ const Logo = () => {
           />
         </filter>
       </defs>
-      <style>
-        {`text { filter: url(#shadow); }`}
-      </style>
+      <style>{`text { filter: url(#shadow); }`}</style>
     </svg>
   );
 };

@@ -2,6 +2,11 @@ import { useRef, useState } from "react";
 import Header from "./Header";
 import CheckValidData from "../utils/Validation";
 import { BG_IMG } from "../utils/Constant";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -15,20 +20,60 @@ const Login = () => {
   };
 
   const handlebuttonclick = () => {
-    console.log(email.current.value);
-    console.log(password.current.value);
     const message = CheckValidData(
-      email.current.value,
-      password.current.value,
-      name.current.value
+      email.current?.value,
+      password.current?.value,
+      !isSignInForm ? name.current?.value : undefined
     );
     setErrorMessage(message);
+
+    // sign-in and sign-up form logic
+
+    if (!isSignInForm) {
+      // Sign-up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log("User signed up:", user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      // Sign-in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("User signed in:", user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    }
   };
 
   return (
     <div>
       <Header />
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+      <div className="absolute top-0 left-0 w-full h-full z-0">
         <img
           className="w-full h-full object-cover"
           src={BG_IMG}
@@ -39,7 +84,7 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg"
+        className="w-3/12 relative p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg z-10"
       >
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
