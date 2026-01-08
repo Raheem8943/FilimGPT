@@ -1,5 +1,3 @@
-import logo from "../assets/FilimGPT_Logo_v2.svg";
-import bg from "../assets/background_img.jpg";
+import logBackground from "../assets/log_background.jpg";
 
-export const LOGO_IMG = logo;
-export const BG_IMG = bg;
+export const BG_IMG = logBackground;

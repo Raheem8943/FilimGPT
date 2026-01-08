@@ -1,27 +1,29 @@
-import { useRef, useState } from 'react';
-import Header from './Header';
-import CheckValidData from '../utils/Validation';
-
+import { useRef, useState } from "react";
+import Header from "./Header";
+import CheckValidData from "../utils/Validation";
+import { BG_IMG } from "../utils/Constant";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const [errorMessage,setErrorMessage]=useState(null);
-  const email=useRef(null)
-  const password=useRef(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
-    };
-    
-    const handlebuttonclick = () => {
-       console.log(email.current.value);
-        console.log(password.current.value);
-      const message=  CheckValidData(email.current.value,password.current.value);
-      setErrorMessage(message);
-       
   };
 
-
+  const handlebuttonclick = () => {
+    console.log(email.current.value);
+    console.log(password.current.value);
+    const message = CheckValidData(
+      email.current.value,
+      password.current.value,
+      name.current.value
+    );
+    setErrorMessage(message);
+  };
 
   return (
     <div>
@@ -29,44 +31,51 @@ const Login = () => {
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           className="w-full h-full object-cover"
-          src="\src\assets\log_background.jpg"
+          src={BG_IMG}
           alt="background"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
       </div>
 
-      <form onSubmit={(e)=>e.preventDefault()} className="w-3/12 absolute p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-3/12 absolute p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg"
+      >
         <h1 className="font-bold text-3xl py-4">
-          {isSignInForm ? 'Sign In' : 'Sign Up'}
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 my-4 w-full bg-gray-700 rounded-lg"
           />
         )}
         <input
-        ref={email}
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="p-4 my-4 w-full bg-gray-700 rounded-lg"
         />
         <input
-        ref={password}
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-700 rounded-lg"
         />
-        <p className='text-red-500'>{errorMessage}</p>
-        <button className="p-4 my-6 bg-red-700 w-full rounded-lg" onClick={handlebuttonclick}>
-          {isSignInForm ? 'Sign In' : 'Sign Up'}
+        <p className="text-red-500">{errorMessage}</p>
+        <button
+          className="p-4 my-6 bg-red-700 w-full rounded-lg"
+          onClick={handlebuttonclick}
+        >
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
 
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
           {isSignInForm
-            ? 'New to FilimGPT? Sign Up Now'
-            : 'Already registered? Sign In Now'}
+            ? "New to FilimGPT? Sign Up Now"
+            : "Already registered? Sign In Now"}
         </p>
       </form>
     </div>
